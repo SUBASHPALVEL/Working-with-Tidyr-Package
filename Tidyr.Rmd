@@ -1,0 +1,63 @@
+---
+title: "Date Tidying with tidyr"
+author: "Subash Palvel"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Installing and loading tidyr
+```{r}
+#install.package("tidyr)
+library(tidyr)
+```
+
+# Reshaping with Pivot longer
+```{r}
+head(relig_income)
+```
+
+
+```{r}
+relig_income %>%
+  pivot_longer(!religion, 
+               names_to = "income", 
+               values_to = "count")
+```
+
+# Reshaping with Pivot wider
+```{r}
+head(us_rent_income)
+```
+
+```{r}
+us_rent_income %>%
+  pivot_wider(
+    names_from = variable,
+    values_from = estimate,
+    values_fill = 0
+  )
+```
+
+#Separating
+```{r}
+head(table3)
+```
+
+```{r}
+table3 %>% 
+  separate(col = rate, 
+           into = c("cases", "population"),
+           sep = "/")
+```
+
+
+#Uniting
+```{r}
+head(table5)
+```
+```{r}
+table5 %>% 
+  unite(col = new, 
+        century, year)
+```
